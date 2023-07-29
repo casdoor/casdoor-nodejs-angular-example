@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     signOut() {
         sessionStorage.removeItem('token');
         this.setTokenReceived(false);
-        window.location.href = 'http://localhost:4200';
+        window.location.href = 'http://localhost:9000';
     }
 
     setUsername(username: string) {

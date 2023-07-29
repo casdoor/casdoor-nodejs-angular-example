@@ -66,7 +66,7 @@ const sdk = new SDK(authCfg);
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: 'http://localhost:9000',
   credentials: true
 }))
 
