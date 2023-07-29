@@ -1,17 +1,15 @@
-
 <div class="login" style="text-align: center">
-
-    <div style="width: 300px; height: 100px">
-        <ng-container *ngIf="isLoggedIn; else loginOptions">
-          <span id="result">userName: <span class="username">{{ username }}</span></span>
-            <button id="signOut" style="width: 200px; height: 50px" (click)="signOut()">Logout</button>
-        </ng-container>
-        <ng-template #loginOptions>
-            <select id="loginMethod" class="login-select">
-                <option value="signin">Signin</option>
-                <option value="popupSignin">PopupSignin</option>
-            </select>
-            <button id="signIn" style="width: 200px; height: 50px" (click)="gotoSignInPage()">Login with Casdoor</button>
-        </ng-template>
-    </div>
+  <div style="width: 300px; height: 100px">
+    <ng-container *ngIf="isLoggedIn; else loginOptions">
+      <span id="result">userName: <span class="username">{{ username }}</span></span>
+      <button id="signOut" style="width: 200px; height: 50px" (click)="signOut()">Logout</button>
+    </ng-container>
+    <ng-template #loginOptions>
+      <select id="loginMethod" class="login-select">
+        <option value="signin">Signin</option>
+        <option value="popupSignin">PopupSignin</option>
+      </select>
+      <button id="signIn" style="width: 200px; height: 50px" (click)="gotoSignInPage()">Login with Casdoor</button>
+    </ng-template>
+  </div>
 </div>
