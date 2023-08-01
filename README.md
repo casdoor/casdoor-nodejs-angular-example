@@ -58,7 +58,7 @@ const authCfg = {
 }
 ```
 
-#### Frontend Config
+#### Frontend
 
 The first 4 parameters should use the same value as the Casdoor backend SDK. The last parameter redirectPath is relative path for the redirected URL, returned from Casdoor's login page. Please refer to the official doc on [frontend sdk configuration](https://casdoor.org/docs/how-to-connect/sdk#2-frontend-configuration) for the latest change.
 
@@ -73,32 +73,29 @@ const config = {
 };
 ```
 
-After setting configurations up, install all dependencies by running `yarn install`. While Casdoor is operating, run the following scripts.
-
-### Available Scripts
-
-In the project directory, you can run:
+Fetch dependencies:
 
 ```shell
-npm run start
+cd web
+npm install
 ```
 
-Installs all necessary dependencies.
+Run frontend at: http://localhost:9000
 
 ```shell
-node backend/server.js
+ng serve --port 9000
 ```
 
-Runs the backend powered by Express at [http://localhost:8080](http://localhost:8080).
+### Backend
+
+Fetch dependencies:
 
 ```shell
-npm run start
+yarn install
 ```
 
-Runs the app in the development mode.
+Run backend at: http://localhost:8080
 
-Note that the port running frontend is set in `package.json`:
-
-`"start": "ng serve --port 9000"`
-
-Open [http://localhost:9000](http://localhost:9000) to view it in your browser.
+```shell
+node server.js
+```
