@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2023 The Casdoor Authors. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,11 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
+=======
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+>>>>>>> temp
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({

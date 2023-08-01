@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2023 The Casdoor Authors. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +15,10 @@
 
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+=======
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+>>>>>>> temp
 
 const routes: Routes = [];
 
@@ -21,5 +26,9 @@ const routes: Routes = [];
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+<<<<<<< HEAD
 export class AppRoutingModule {
 }
+=======
+export class AppRoutingModule { }
+>>>>>>> temp

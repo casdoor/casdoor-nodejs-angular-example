@@ -13,7 +13,11 @@
 // limitations under the License.
 
 const url = require('url')
+<<<<<<< HEAD
 const {SDK} = require('casdoor-nodejs-sdk');
+=======
+const { SDK } = require('casdoor-nodejs-sdk');
+>>>>>>> temp
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -66,7 +70,11 @@ const sdk = new SDK(authCfg);
 const app = express();
 
 app.use(cors({
+<<<<<<< HEAD
   origin: 'http://localhost:9000',
+=======
+  origin: 'http://localhost:4200',
+>>>>>>> temp
   credentials: true
 }))
 
@@ -88,7 +96,11 @@ app.get('/api/getUserInfo', (req, res) => {
 app.post('*', (req, res) => {
   let urlObj = url.parse(req.url, true).query;
   sdk.getAuthToken(urlObj.code).then(result => {
+<<<<<<< HEAD
     res.send(JSON.stringify({token: result}));
+=======
+    res.send(JSON.stringify({ token: result }));
+>>>>>>> temp
   });
 });
 

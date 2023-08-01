@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2023 The Casdoor Authors. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +16,13 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
+=======
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { AuthComponent } from './auth/auth.component';
+import { AccountComponent } from './account/account.component'; // Make sure to provide the correct path to the HeaderComponent.
+>>>>>>> temp
 
 @NgModule({
   declarations: [
@@ -26,5 +34,9 @@ import {AppComponent} from './app.component';
   providers: [],
   bootstrap: [AppComponent,]
 })
+<<<<<<< HEAD
 export class AppModule {
 }
+=======
+export class AppModule { }
+>>>>>>> temp

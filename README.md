@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center" style="border-bottom: none;">Casdoor nodejs-angular Example</h1>
 
 ## Demo
@@ -102,3 +103,6 @@ Note that the port running frontend is set in `package.json`:
 `"start": "PORT=9000 react-scripts start"`
 
 Open [http://localhost:9000](http://localhost:9000) to view it in your browser.
+=======
+# casdoor-nodejs-angular-example
+>>>>>>> temp

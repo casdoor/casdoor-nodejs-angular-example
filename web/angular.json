@@ -94,8 +94,11 @@
         }
       }
     }
+<<<<<<< HEAD
   },
   "cli": {
     "analytics": false
+=======
+>>>>>>> temp
   }
 }
