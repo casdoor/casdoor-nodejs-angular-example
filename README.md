@@ -10,8 +10,8 @@ The example includes two parts:
 
 | Name     | SDK                 | Framework  | Source code                                                       |
 |----------|---------------------|------------|-------------------------------------------------------------------|
-| Frontend | casdoor-angular-sdk | Angular    | https://github.com/casdoor/casdoor-nodejs-angular-example/web     |
-| Backend  | casdoor-nodejs-sdk  | Express.js | https://github.com/casdoor/casdoor-nodejs-angular-example/backend |
+| Frontend | casdoor-angular-sdk | Angular    | https://github.com/casdoor/casdoor-nodejs-angular-example/tree/master/web     |
+| Backend  | casdoor-nodejs-sdk  | Express.js | https://github.com/casdoor/casdoor-nodejs-angular-example/tree/master/backend |
 
 ## Installation
 
