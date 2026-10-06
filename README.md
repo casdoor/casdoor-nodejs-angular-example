@@ -1,101 +1,98 @@
-<h1 align="center" style="border-bottom: none;">Casdoor nodejs-angular Example</h1>
+# Casdoor Node.js + Angular Example
 
-## Demo
+[![Build](https://github.com/casdoor/casdoor-nodejs-angular-example/actions/workflows/build.yml/badge.svg)](https://github.com/casdoor/casdoor-nodejs-angular-example/actions/workflows/build.yml)
+[![License](https://img.shields.io/github/license/casdoor/casdoor-nodejs-angular-example)](https://github.com/casdoor/casdoor-nodejs-angular-example/blob/master/LICENSE)
+[![Discord](https://img.shields.io/discord/1022748306096537660?logo=discord&label=discord&color=5865F2)](https://discord.gg/5rPsrAzK7S)
 
-![angular-illustration.gif](demo.gif)
+An example web app that signs users in with [Casdoor](https://casdoor.ai/), with an Angular frontend and a Node.js (Express) backend.
 
-## Architecture
+| Part     | SDK                                                                 | Language             | Port |
+|----------|---------------------------------------------------------------------|----------------------|------|
+| Frontend | [casdoor-js-sdk](https://github.com/casdoor/casdoor-js-sdk)         | TypeScript + Angular | 9000 |
+| Backend  | [casdoor-nodejs-sdk](https://github.com/casdoor/casdoor-nodejs-sdk) | JavaScript + Express | 8080 |
 
-The example includes two parts:
+## How it works
 
-| Name     | SDK                 | Framework  | Source code                                                       |
-|----------|---------------------|------------|-------------------------------------------------------------------|
-| Frontend | casdoor-angular-sdk | Angular    | https://github.com/casdoor/casdoor-nodejs-angular-example/tree/master/web     |
-| Backend  | casdoor-nodejs-sdk  | Express.js | https://github.com/casdoor/casdoor-nodejs-angular-example/tree/master/backend |
+1. The frontend sends the user to the Casdoor sign-in page with `sdk.getSigninUrl()`.
+2. After signing in, Casdoor redirects back to `http://localhost:9000/callback` with `code` and `state`.
+3. The frontend checks `state` and sends the code to the backend with `sdk.signin()`: `POST /api/signin?code=...`.
+4. The backend exchanges the code for an access token with `sdk.getAuthToken()` and returns it. The frontend keeps it in `sessionStorage`.
+5. The frontend calls `GET /api/getUserInfo` with `Authorization: Bearer <token>`. The backend verifies the token with `sdk.parseJwtToken()` and returns the user in it.
 
-## Installation
+The backend is [backend/server.js](backend/server.js), the frontend is [web/src/app/app.component.ts](web/src/app/app.component.ts).
 
-Example uses Casdoor to manage members. So you need to create an organization and an application for the example in a Casdoor instance.
+## Prerequisites
 
-### Necessary Configurations
+- Node.js 20.19+ and Yarn
+- A Casdoor server. The example is preconfigured for the public demo server https://door.casdoor.com, so it runs as is. To use your own, see [Casdoor installation](https://casdoor.ai/docs/basic/server-installation).
 
-#### Get the Code
+## Configuration
 
-```shell
-git clone https://github.com/casdoor/casdoor
-git clone https://github.com/casdoor/casdoor-nodejs-angular-example
-```
+Skip this section to try the example with the public demo server.
 
-#### Run Example
+In your Casdoor, create (or reuse) an organization and an application, and add `http://localhost:9000/callback` to the application's **Redirect URLs**. Then fill in both parts:
 
-1. Run Casdoor
-2. Configure
-  - Backend
-  - Frontend
+### Backend
 
-#### Backend Config
-
-Initialization requires 6 (or 5) parameters, which are all string type. Please refer to the official doc on [backend sdk configuration](https://casdoor.org/docs/how-to-connect/sdk#1-backend-sdk-configuration) for the latest change.
-
-| Parameter        | Must | Description                                                                    |
-|------------------|------|--------------------------------------------------------------------------------|
-| endpoint         | Yes  | Casdoor Server URL, like `https://door.casdoor.com` or `http://localhost:8000` |
-| clientId         | Yes  | Client ID for the Casdoor application                                          |
-| clientSecret     | Yes  | Client secret for the Casdoor application                                      |
-| jwtPublicKey     | Yes  | The public key for the Casdoor application's cert                              |
-| organizationName | Yes  | The name for the Casdoor organization                                          |
-| applicationName  | No   | The name for the Casdoor application                                           |
+[backend/server.js](backend/server.js), see [casdoor-nodejs-sdk](https://github.com/casdoor/casdoor-nodejs-sdk#️-configuration):
 
 ```js
-// in ./backend/server.js
 const authCfg = {
-  endpoint: 'https://door.casdoor.com',
-  clientId: '014ae4bd048734ca2dea',
-  clientSecret: 'f26a4115725867b7bb7b668c81e1f8f7fae1544d',
-  certificate: cert,
-  orgName: 'casbin',
-  appName: 'app-casnode',
-}
+  endpoint: 'https://door.casdoor.com', // Casdoor server URL
+  clientId: '014ae4bd048734ca2dea', // client ID of the application
+  clientSecret: 'f26a4115725867b7bb7b668c81e1f8f7fae1544d', // client secret of the application
+  certificate: cert, // the certificate of the cert used by the application, see Casdoor -> Certs
+  orgName: 'casbin', // organization of the application
+  appName: 'app-casnode', // name of the application
+};
 ```
 
-#### Frontend
+### Frontend
 
-The first 4 parameters should use the same value as the Casdoor backend SDK. The last parameter redirectPath is relative path for the redirected URL, returned from Casdoor's login page. Please refer to the official doc on [frontend sdk configuration](https://casdoor.org/docs/how-to-connect/sdk#2-frontend-configuration) for the latest change.
+[web/src/app/app.component.ts](web/src/app/app.component.ts), the same application as the backend:
 
-```js
-// in ./src/Setting.js
+```ts
 const config = {
   serverUrl: "https://door.casdoor.com",
   clientId: "014ae4bd048734ca2dea",
   organizationName: "casbin",
   appName: "app-casnode",
   redirectPath: "/callback",
+  signinPath: "/api/signin",
 };
 ```
 
-Fetch dependencies:
+## Run
 
 ```shell
-cd web
-npm install
-```
-
-Run frontend at: http://localhost:9000
-
-```shell
-ng serve --port 9000
-```
-
-### Backend
-
-Fetch dependencies:
-
-```shell
+git clone https://github.com/casdoor/casdoor-nodejs-angular-example
+cd casdoor-nodejs-angular-example
 yarn install
 ```
 
-Run backend at: http://localhost:8080
+Backend, at http://localhost:8080:
 
 ```shell
-node server.js
+yarn server
 ```
+
+Frontend (Angular 21), at http://localhost:9000:
+
+```shell
+cd web
+yarn install
+yarn start
+```
+
+Open http://localhost:9000 and click **Login with Casdoor**.
+
+## Resources
+
+- [Casdoor documentation](https://casdoor.ai/docs/overview)
+- [casdoor-nodejs-sdk](https://github.com/casdoor/casdoor-nodejs-sdk)
+- [casdoor-js-sdk](https://github.com/casdoor/casdoor-js-sdk)
+- More frontends with a Node.js backend: [casdoor-nodejs-react-example](https://github.com/casdoor/casdoor-nodejs-react-example)
+
+## License
+
+[Apache-2.0](LICENSE)

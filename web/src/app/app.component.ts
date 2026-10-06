@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Sdk from 'casdoor-js-sdk';
-import {Component, OnInit, ChangeDetectorRef, AfterViewChecked} from "@angular/core";
+import {Component, OnInit, ChangeDetectorRef} from "@angular/core";
 
 const config = {
   serverUrl: 'https://door.casdoor.com',
@@ -21,12 +21,14 @@ const config = {
   organizationName: "casbin",
   appName: "app-casnode",
   redirectPath: "/callback",
+  signinPath: "/api/signin",
 };
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   username: string = '';
@@ -43,7 +45,12 @@ export class AppComponent implements OnInit {
       if (!sessionStorage.getItem('token')) {
 
         this.sdk.signin('http://localhost:8080').then((res: any) => {
+          if (res.status !== 'ok') {
+            alert(`Login failed: ${res.msg}`);
+            return;
+          }
           sessionStorage.setItem('token', res.token);
+          window.history.replaceState({}, '', '/');
           this.setTokenReceived(true);
 
           this.getInfo().then((res) => this.setInfo(res));
@@ -61,7 +68,9 @@ export class AppComponent implements OnInit {
     if (!token) {
       return;
     } else {
-      const response = await fetch(`http://localhost:8080/api/getUserInfo?token=${token}`);
+      const response = await fetch(`http://localhost:8080/api/getUserInfo`, {
+        headers: {Authorization: `Bearer ${token}`},
+      });
       return response.json();
     }
   }
